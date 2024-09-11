@@ -9,7 +9,7 @@
     <main class="dashboard" style="width:66%">
     <% }%>
   
-    <section class="matters" style="width:100%">
+    <section class="activities" style="width:100%">
   
         <div class="container">
             <h1>Atividades</h1>
@@ -18,7 +18,7 @@
             <% } %>
             <% if (!locals.public) {%>
             <div style="padding-bottom: 12px;">
-                <form action="/matters" method="post">
+                <form action="/activity" method="post">
                     <p>
                         <label for="title"> Titulo
                             <input type="text" id="title" name="title">
@@ -41,19 +41,19 @@
                 </form>
             </div>
         <% } %>
-        <% if (locals.matters) { %>
-            <% for(var i=0; i<matters.length; i++) {%>
+        <% if (locals.activities) { %>
+            <% for(var i=0; i<activities.length; i++) {%>
                 <article>
-                    <form class="matters-manager" method="PUT" action="/matter/<%= matters[i].id%>">
+                    <form class="activities-manager" method="PUT" action="/activity/<%= activities[i].id%>">
                         <button type="button" class="hidden cancel-edit" onclick="toggleForm(this)"></button>
                         <div>
-                            <h2 class="data title"><%= matters[i].title %></h2>
-                            <input class="hidden" type="text" id="title" name="title" value="<%= matters[i].title %>">
-                            <h3 class="data subject"><%= matters[i].subject %></h3>
-                            <input class="hidden" type="text" id="subject" name="subject" value="<%= matters[i].subject %>">
-                            <div class="data body"><%- matters[i].body %></div>
+                            <h2 class="data title"><%= activities[i].title %></h2>
+                            <input class="hidden" type="text" id="title" name="title" value="<%= activities[i].title %>">
+                            <h3 class="data subject"><%= activities[i].subject %></h3>
+                            <input class="hidden" type="text" id="subject" name="subject" value="<%= activities[i].subject %>">
+                            <div class="data body"><%- activities[i].body %></div>
                             <div class="hidden">
-                                <textarea class="htmeditor" id="body" name="body"><%= matters[i].body %></textarea>
+                                <textarea class="htmeditor" id="body" name="body"><%= activities[i].body %></textarea>
                             </div>
                         </div>
                         <% if (!locals.public) {%>
@@ -61,7 +61,7 @@
                             
                             
                         
-                        <div class="matters-manager-box">
+                        <div class="activities-manager-box">
                             
                             <button type="button" class="PUT" onclick="transformToEdit(this)">Editar</button>
                             <button type="button"class="DELETE"onclick="FormManager(this)"> Excluir</button>

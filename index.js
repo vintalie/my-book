@@ -11,6 +11,7 @@ const activitiesRoutes = require('./routes/activity')
 const usersRoutes = require('./routes/user')
 const publicsRoutes = require('./routes/public')
 const mattersRoutes = require('./routes/matter')
+const categoriesRoutes = require('./routes/category')
 
 
 const db = require('./db.js')
@@ -19,22 +20,17 @@ const PORT = 8080
 
 var app = express();
 
-// config
-
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use('/assets', express.static(__dirname + '/assets'))
-// middleware
 
 app.use(express.urlencoded({ extended: false }))
 initAuth();
 app.use(session({
-  resave: true, // don't save session if unmodified
-  saveUninitialized: true, // don't create session until something stored
+  resave: true, 
+  saveUninitialized: true, 
   secret: 'shhhh, very secret'
 }));
-
-// Session-persisted message middleware
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -47,6 +43,7 @@ app.use(activitiesRoutes)
 app.use(usersRoutes)
 app.use(publicsRoutes)
 app.use(mattersRoutes)
+app.use(categoriesRoutes)
 
 db.sync({force:false})
   .then(() => {

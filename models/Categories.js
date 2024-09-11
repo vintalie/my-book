@@ -12,18 +12,21 @@ module.exports = sequelize.define(
             type:DataTypes.STRING
         },
         hierarchy:{
-            type:DataTypes.INTEGER
-        },
-        matter: {
-            type:DataTypes.ARRAY(DataTypes.STRING),
-            defaultValue:[]
+            type:DataTypes.DECIMAL,
+            defaultValue:0
         },
         image: {
             type:DataTypes.STRING
         },
         body: {
             type:DataTypes.STRING
+        },
+        slug:{
+            type:DataTypes.STRING
+        },
+        originUserID:{
+            type:DataTypes.INTEGER
         }
-
+        
 
 })

@@ -3,22 +3,22 @@ const passport = require('passport')
 
 module.exports = {
   
-    viewActivities: async (req,res) => {
-        const public = !req.isAuthenticated()
-
-        let search 
+    get: async (req,res) => {
+      let search
+      let activity
+      const public = !req.isAuthenticated()
+      if(!req.params.slug){
         if(!public) search = await Activities.findAll({where:{originUserID:req.user.id}})
         if(public) search = await Activities.findAll()
         res.render('activities/home', {activities:search, public:public})
+      }
+      if(req.params.slug){
+        activity = await Activities.findOne({where:{slug:req.params.slug}})
+        if(activity != null) res.render('activities/home', {activities:[activity], public:public})
+        if(activity == null) res.render('activities/home', {message:'Not Found', public:public} , )
+      }
     },
-    viewActivity: async (req,res) => {
-      
-      const public = !req.isAuthenticated()
-      const activity = await Activities.findOne({where:{slug:req.params.slug}})
-      if(activity != null) res.render('activities/home', {activities:[activity], public:public})
-      if(activity == null) res.render('activities/home', {message:'Not Found', public:public} , )
-    },
-    addActivities: async(req,res) => {
+    post: async(req,res) => {
       let search = await Activities.findAll({where:{originUserID:req.user.id}})
       const originUserID = req.user.id
       const {title, subject, body} = req.body;
@@ -33,7 +33,7 @@ module.exports = {
       await Activities.create({title, subject, body, originUserID, slug})
         res.redirect('activities?registrationdone')
     },
-    attActivity: async(req,res) => {
+    put: async(req,res) => {
       
       const {title, subject, body} = req.body;
       const slug = title.toLowerCase().replace(' ', '-')
@@ -46,7 +46,7 @@ module.exports = {
           res.send(200)
         }
       },
-    delActivity: async(req,res) => {
+    delete: async(req,res) => {
      
       await Activities.destroy({where: {id:req.params.id}})
       res.send(200)
