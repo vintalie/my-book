@@ -4,12 +4,10 @@ const { protectRoute } = require('../../auth');
 const router = express.Router()
 const multer = require('multer')
 
-
-
-router.get('/activities',activitiesController.viewActivities)
-router.get('/activity/:slug', activitiesController.viewActivity)
-router.post('/activities',protectRoute, activitiesController.addActivities)
-router.put('/activity/:id',protectRoute, activitiesController.attActivity)
-router.delete('/activity/:id', protectRoute, activitiesController.delActivity)
+router.get('/activities',activitiesController.get)
+router.get('/activity/:slug', activitiesController.get)
+router.post('/activity',protectRoute, activitiesController.post)
+router.put('/activity/:id',protectRoute, activitiesController.put)
+router.delete('/activity/:id', protectRoute, activitiesController.delete)
 
 module.exports = router
