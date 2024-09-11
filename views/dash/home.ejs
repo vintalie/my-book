@@ -1,0 +1,12 @@
+
+<%- include('../partials/head', { title: 'Authentication Example' }) -%>
+
+<main style="display:inline-flex; width:100%">
+    <aside class="dashboard-sidebar" style="width:33%">
+        <%- include('../partials/dashboard/dashboard-sidebar') -%>
+    </aside>
+    <main class="dashboard" style="width:66%">
+        <h1>Olá, <%- user.name -%></h1>
+    </main>
+</main>
+<%- include('../partials/foot') -%>

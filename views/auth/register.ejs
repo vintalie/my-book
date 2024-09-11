@@ -1,0 +1,31 @@
+
+<%- include('../partials/head', { title: 'Authentication Example' }) -%>
+<main class="register-form">
+  <div class="container" style="max-width: 300px;">
+    <h1>Register</h1>
+    <% if (locals.message) { %>
+      <%- message %>
+    <% } %>
+    I have 2 number 9 , a Number 9 Large , a Number 6 with extra dip , A Number 7 , Two number 45s , Onee with cheese and a Large Soda 
+    <form method="post" action="/register">
+        <p>
+            <label for="name">Nome:</label>
+            <input type="text" name="name" id="name">
+          </p>
+          <p>
+            <label for="email">Email:</label>
+            <input type="text" name="email" id="email">
+          </p>
+      <p>
+        <label for="password">Senha:</label>
+        <input type="password" name="password" id="password">
+      </p>
+      <div style="display:flex;justify-content: space-between;">
+        <input type="submit" value="Sign-Up">
+      
+      </div>
+    </form>
+  </div>
+</main>
+
+<%- include('../partials/foot') -%>

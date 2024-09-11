@@ -1,0 +1,26 @@
+
+<%- include('../partials/head', { title: 'Authentication Example' }) -%>
+<main class="login-form">
+  <div class="container">
+  <h1>Login</h1>
+<% if (locals.message) { %>
+  <%- message %>
+<% } %>
+    <form method="post">
+      <p>
+        <label for="email">Username:</label>
+        <input type="text" name="email" id="email">
+      </p>
+      <p>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+      </p>
+      <div style="display:flex;justify-content: space-between;">
+        <input type="submit" value="Login">
+        <a href="/register">C'mon baby, lets create a account</a>
+      </div>
+    </form>
+  </div>
+</main>
+
+<%- include('../partials/foot') -%>

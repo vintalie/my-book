@@ -1,0 +1,26 @@
+
+<%- include('../partials/head', { title: 'Authentication Example' }) -%>
+<%- include('../partials/navbar') -%>
+
+
+<main style="display:inline-flex; width:100%">
+    <% if (!locals.public) {%>
+    <aside class="dashboard-sidebar" style="width:33%">
+        <%- include('../partials/dashboard/dashboard-sidebar') -%>
+    </aside>
+    <main class="dashboard" style="width:66%">
+    <% }%>
+    
+    <% if(locals.public){ %>
+    <main class="dashboard" style="width:100%">
+    <% } %>
+     
+        <% if (locals.activities) { %>
+            <% for(var i=0; i<activities.length; i++) {%>
+                <article>
+                    <h2><%= activities[i].title %></h2>
+                    <h3><%= activities[i].subject %></h3>
+                    <%- activities[i].body %>
+                </article>
+              <% } %>
+            <% } %>
