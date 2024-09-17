@@ -1,4 +1,5 @@
-const Activities = require('../../models/Activities')
+const Models = require('../../models')
+const Activities = Models.Activities
 
 module.exports = {
     homeView:async(req,res) => {

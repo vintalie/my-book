@@ -1,4 +1,5 @@
-const Matters = require('../../models/Matters')
+const Models = require('../../models')
+const Matters = Models.Matters
 
 module.exports = {
     get:async(req,res) => {

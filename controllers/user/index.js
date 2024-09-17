@@ -1,4 +1,5 @@
-const User = require('../../models/User')
+const Models = require('../../models')
+const User = Models.Users
 const bcrypt = require('bcryptjs');
 
 
