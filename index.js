@@ -5,7 +5,6 @@ const path = require('path');
 const passport = require('passport');
 const multer = require('multer')
 
-const authRoutes = require('./routes/auth')
 const dashboardRoutes = require('./routes/dash')
 const activitiesRoutes = require('./routes/activity')
 const usersRoutes = require('./routes/user')
@@ -37,7 +36,6 @@ app.use(passport.session());
 app.use(multer().none());
 
 
-app.use(authRoutes)
 app.use(dashboardRoutes)
 app.use(activitiesRoutes)
 app.use(usersRoutes)

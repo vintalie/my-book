@@ -1,23 +1,20 @@
-const User = require('../../models/User')
+const Models = require('../../models')
+const User = Models.Users
 const bcrypt = require('bcryptjs');
 
 
 module.exports ={
-    currentUserView:async (req,res) => {
+    get:async (req,res) => {
         const public = !req.isAuthenticated()
-        let search = await User.findOne({where:{id:req.user.dataValues.id}})
-        res.render('user/home', {user:search, public:public})
-
-    },
-    specificUserView:async (req,res) => {
-        
-        const public = !req.isAuthenticated()
-        let search = await User.findOne({where:{id:req.params.id}})
+        let search 
+        if(!req.params.id) search = await User.findOne({where:{id:req.user.dataValues.id}})
+        if(req.params.id) search = await User.findOne({where:{id:req.params.id}})
         if(search != null) res.render('user/home', {user:search, public:public})
         if(search == null) res.render('user/home', {message:'Not Found', public:public} , )
-
+        res.render('user/home', {user:search, public:public})
+        
     },
-    addUser: async(req,res) => {
+    post: async(req,res) => {
         const {name, email, password} = req.body;
         if(!name || !email || !password) {
           return res.render('auth/register', { message: 'Please fill all fields'})
@@ -28,7 +25,7 @@ module.exports ={
         await User.create({name,email,password:bcrypt.hashSync(password,8)})
           res.redirect('login?registrationdone')
       },  
-    attUser:async (req,res) => {
+    put:async (req,res) => {
 
         const {name, email, password} = req.body;
     
@@ -41,7 +38,7 @@ module.exports ={
             }
         
     },
-    delUser:async (req,res) =>{
+    delete:async (req,res) =>{
         await User.destroy({where: {id:req.user.dataValues.id}})
           res.send(200)
         }
