@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { protectRoute } = require('../../auth')
+const { protectRoute } = require('../user/auth')
 const categoryController = require('../../controllers/category')
 
 router.get('/category/:id',categoryController.get)

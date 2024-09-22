@@ -13,8 +13,8 @@ const mattersRoutes = require('./routes/matter')
 const categoriesRoutes = require('./routes/category')
 
 
-const db = require('./db.js')
-const { init: initAuth } = require('./auth');
+
+const { init: initAuth } = require('./controllers/user/auth');
 const PORT = 8080
 
 var app = express();
@@ -43,8 +43,5 @@ app.use(publicsRoutes)
 app.use(mattersRoutes)
 app.use(categoriesRoutes)
 
-db.sync({force:false})
-  .then(() => {
-    app.listen(PORT, console.log('Server rodando na ' + PORT))
-  }) 
+app.listen(PORT, console.log('Server rodando na ' + PORT))
 

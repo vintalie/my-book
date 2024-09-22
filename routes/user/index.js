@@ -2,7 +2,7 @@ const express = require('express')
 const AuthController = require('../../controllers/auth')
 const UsersController = require('../../controllers/user')
 const router = express.Router()
-const {protectRoute} = require('../../auth.js')
+const {protectRoute} = require('../user/auth.js')
 
 
 router.get('/user', protectRoute, UsersController.get )

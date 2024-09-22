@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { protectRoute } = require('../../auth')
+const { protectRoute } = require('../user/auth')
 const matterController = require('../../controllers/matter')
 
 router.get('/matters/:id',matterController.get)
