@@ -16,4 +16,5 @@ jobs:
     - name: Use Node.js
       uses: actions/setup-node@v4.0.4
     - run: npm install
-    - run: pm2 restart start
+    - run: pm2 start npm --name "appname" -- run "start"
+
