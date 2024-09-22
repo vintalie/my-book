@@ -1,6 +1,6 @@
-DB_DATABASE="title"
+DB_DATABASE="meu_caderno"
 DB_USERNAME="root"
 DB_HOST="localhost"
-DB_PASSWORD="123456*"
+DB_PASSWORD="Mrmario764*"
 DB_PORT=3306
 DB_DIALECT='mysql'
