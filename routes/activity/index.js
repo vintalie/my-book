@@ -1,6 +1,6 @@
 const express = require('express')
 const activitiesController = require('../../controllers/activity')
-const { protectRoute } = require('../../auth');
+const { protectRoute } = require('../user/auth');
 const router = express.Router()
 const multer = require('multer')
 
