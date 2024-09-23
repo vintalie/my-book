@@ -2,12 +2,13 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const bcrypt = require('bcryptjs')
 const Models = require('../../models')
-const User = Models.User
+const User = Models.Users
 
 module.exports = {
     init: () => {
         passport.use(
             new LocalStrategy({ usernameField: 'email'}, async(email,password,done) => {
+                console.log(Models)
                 const user = await User.findOne({where:{email}})
                 if(!user) return done(null,false)
                 if(!bcrypt.compareSync(password, user.password)) return done(null, false)
