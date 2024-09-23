@@ -1,0 +1,34 @@
+
+
+
+<% if (locals.activities) { %>
+    <% for(var i=0; i<activities.length; i++) {%>
+        <article>
+            <form class="activities-manager" method="PUT" action="/activity/<%= activities[i].id%>">
+                <button type="button" class="hidden cancel-edit" onclick="toggleForm(this)"></button>
+                <div>
+                    <h2 class="data title"><%= activities[i].title %></h2>
+                    <input class="hidden" type="text" id="title" name="title" value="<%= activities[i].title %>">
+                    <h3 class="data subject"><%= activities[i].subject %></h3>
+                    <input class="hidden" type="text" id="subject" name="subject" value="<%= activities[i].subject %>">
+                    <div class="data body"><%- activities[i].body %></div>
+                    <div class="hidden">
+                        <textarea class="htmeditor" id="body" name="body"><%= activities[i].body %></textarea>
+                    </div>
+                </div>
+                <% if (!locals.public) {%>
+                
+                    
+                    
+                
+                <div class="activities-manager-box">
+                    
+                    <button type="button" class="PUT" onclick="transformToEdit(this)">Editar</button>
+                    <button type="button"class="DELETE"onclick="FormManager(this)"> Excluir</button>
+                </div>
+                <% } %>
+            </form>
+        </article>
+      <% } %>
+    <% } %>
+

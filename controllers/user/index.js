@@ -9,18 +9,18 @@ module.exports ={
         let search 
         if(!req.params.id) search = await User.findOne({where:{id:req.user.dataValues.id}})
         if(req.params.id) search = await User.findOne({where:{id:req.params.id}})
-        if(search != null) res.render('user/home', {user:search, public:public})
-        if(search == null) res.render('user/home', {message:'Not Found', public:public} , )
-        res.render('user/home', {user:search, public:public})
+        if(search != null) res.render('users', {user:search, public:public})
+        if(search == null) res.render('users', {message:'Not Found', public:public} , )
+        res.render('users', {user:search, public:public})
         
     },
     post: async(req,res) => {
         const {name, email, password} = req.body;
         if(!name || !email || !password) {
-          return res.render('auth/register', { message: 'Please fill all fields'})
+          return res.render('auth', { message: 'Please fill all fields', register:true})
         }
         if(await User.findOne({where: {email}})){
-          return res.render('auth/register', {message: 'Already Exist'})
+          return res.render('auth', {message: 'Already Exist', register:true})
         }
         await User.create({name,email,password:bcrypt.hashSync(password,8)})
           res.redirect('login?registrationdone')
@@ -30,7 +30,7 @@ module.exports ={
         const {name, email, password} = req.body;
     
         if(!name || !email || !password) {
-            return res.render('user/home', { message: 'Please fill all fields'})
+            return res.render('users', { message: 'Please fill all fields'})
         }
         if(await User.findOne({where: {id:req.user.dataValues.id}})){
             await User.update({name, email, password:bcrypt.hashSync(password)}, {where: {id:req.user.dataValues.id}})

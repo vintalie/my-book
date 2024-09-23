@@ -1,0 +1,31 @@
+<% if (!locals.public) {%>
+<div class="container">
+    <h1>Atividades</h1>
+    <% if (locals.message) { %>
+        <%- message %>
+    <% } %>
+        <div style="padding-bottom: 12px;">
+        <form action="/activity" method="post">
+            <p>
+                <label for="title"> Titulo
+                    <input type="text" id="title" name="title">
+                </label>
+            </p>
+            <p>
+                <label for="subject"> Assunto
+                    <input type="text" id="subject" name="subject">
+                </label>
+            </p>
+            <p>
+                <!-- <label for="body"> Corpo
+                    <textarea type="text" id="body htmeditor" name="body">
+                        
+                    </textarea>
+                </label> -->
+                <textarea class="htmeditor" name="body" id="body"></textarea>
+            </p>
+            <input type="submit" value="Enviar">
+        </form>
+    </div>
+</div>
+<% } %>
