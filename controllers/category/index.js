@@ -8,14 +8,14 @@ module.exports = {
         const categories = await Categories.findAll()
         if(req.params.id){
             search = await Categories.findOne({where:{id:req.params.id}})
-            if(search != null) res.render('categories/home', {categories:[search], public:public})
-            if(search == null) res.render('categories/home', {message:'Not Found', public:public} , )
+            if(search != null) res.render('categories', {categories:[search], public:public})
+            if(search == null) res.render('categories', {message:'Not Found', public:public} , )
         }
         if(!req.params.id){
             if(!public) search = await Categories.findAll({where:{originUserID:req.user.id}})
             if(public) search = categories
         }
-        res.render('categories/home', {categories:search, public:public})
+        res.render('categories', {categories:search, public:public})
     },
     post:async(req,res) => {
         let search = await Categories.findAll({where:{originUserID:req.user.id}})
@@ -24,10 +24,10 @@ module.exports = {
         const slug = name.toLowerCase().replace(' ', '-')
         
         if(!name || !hierarchy|| !body) {
-            return res.render('categories/home', { categories:search, message: 'Please fill all fields'})
+            return res.render('categories', { categories:search, message: 'Please fill all fields'})
         }
         if(await Categories.findOne({where: {slug}})){
-            return res.render('categories/home', { categories:search, message: 'Already Exist'})
+            return res.render('categories', { categories:search, message: 'Already Exist'})
         }
         await Categories.create({name, hierarchy, image, body, originUserID, slug})
             res.redirect('categories?registrationdone')
@@ -37,7 +37,7 @@ module.exports = {
         const slug = name.toLowerCase().replace(' ', '-')
         const originUserID = req.user.id
         if(!name || !hierarchy|| !body) {
-            return res.render('categories/home', { categories:search, message: 'Please fill all fields'})
+            return res.render('categories', { categories:search, message: 'Please fill all fields'})
         }
         if(await Categories.findOne({where:{id:req.params,id}})){
             await Categories.update({name, hierarchy, image, body, originUserID, slug}, {where:{id:req.params,id}})

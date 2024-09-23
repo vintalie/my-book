@@ -1,0 +1,21 @@
+<% if (locals.message) { %>
+    <%- message %>
+  <% } %>
+  <form method="post" action="/register">
+      <p>
+          <label for="name">Nome:</label>
+          <input type="text" name="name" id="name">
+        </p>
+        <p>
+          <label for="email">Email:</label>
+          <input type="text" name="email" id="email">
+        </p>
+    <p>
+      <label for="password">Senha:</label>
+      <input type="password" name="password" id="password">
+    </p>
+    <div style="display:flex;justify-content: space-between;">
+      <input type="submit" value="Sign-Up">
+    
+    </div>
+  </form>

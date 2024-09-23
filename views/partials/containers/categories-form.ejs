@@ -1,0 +1,37 @@
+<% if (!locals.public) {%>
+<div class="container">
+    <h1>categorias</h1>
+    <% if (locals.message) { %>
+        <%- message %>
+    <% } %>
+    
+    <div style="padding-bottom: 12px;">
+        <form action="/category" method="post">
+            <p>
+                <label for="name"> Titulo
+                    <input type="text" id="name" name="name">
+                </label>
+            </p>
+            <p>
+                <label for="hierarchy"> Hierarquia
+                    <select name="hierarchy" id="hierarchy">
+                        <option value="0">Sem Hierarquia</option>
+                        <% for(var i=0; i<categories.length; i++) {%>
+                            <option value="<%= categories[i].id %>"><%= categories[i].name %></option>
+                        <% } %>
+                    </select>
+                </label>
+            </p>
+            <p>
+                <!-- <label for="body"> Corpo
+                    <textarea type="text" id="body htmeditor" name="body">
+                        
+                    </textarea>
+                </label> -->
+                <textarea class="htmeditor" name="body" id="body"></textarea>
+            </p>
+            <input type="submit" value="Enviar">
+        </form>
+    </div>
+</div>
+<% } %>

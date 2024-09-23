@@ -5,6 +5,4 @@ const router = express.Router()
 
 router.get('/dashboard',protectRoute, dashboardController.dashboardView)
 
-
-
 module.exports = router;

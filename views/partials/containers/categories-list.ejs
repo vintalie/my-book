@@ -1,0 +1,91 @@
+
+
+<% if (locals.categories) { %>
+    <% for(var i=0; i<categories.length; i++) {%>
+        <% if (categories[i].hierarchy == 0) { %>
+        <article>
+            <form class="categories-manager" method="PUT" action="/category/<%= categories[i].id%>">
+                <button type="button" class="hidden cancel-edit" onclick="toggleForm(this)">X</button>
+            
+                    <h2 class="data name"><%= categories[i].name %></h2>
+                    <input class="hidden" type="text" id="name" name="name" value="<%= categories[i].name %>">
+                    <select name="hierarchy" class="hidden" id="hierarchy">
+                        <option value="0">Sem HIerarquia</option>
+                        <% for(var u=0; u<categories.length; u++) {%>
+                            <% if (categories[u].id == categories[i].hierarchy) { %>
+                            <option value="<%= categories[u].id %>" selected><%= categories[u].name %></option>
+                            <% } %>
+                            <% if (categories[u].id != categories[i].hierarchy) { %>
+                            <option value="<%= categories[u].id %>"><%= categories[u].name %></option>
+                            <% } %>
+
+                        <% } %>
+                    </select>
+
+                    <div class="data body"><%- categories[i].body %></div>
+                    <div class="data hidden">
+                        <textarea class="htmeditor" id="body" name="body"><%= categories[i].body %></textarea>
+                    </div>
+                
+
+                <% if (!locals.public) {%>
+                
+                    
+                    
+                
+                    <div class="categories-manager-box">
+                        
+                        <button type="button" class="PUT" onclick="transformToEdit(this)">Editar</button>
+                        <button type="button"class="DELETE"onclick="FormManager(this)"> Excluir</button>
+                    </div>
+                    <% } %>
+                <% for(var o=0; o<categories.length; o++) {%>
+                    <% if(categories[i].id == categories[o].hierarchy) { %>
+                    <article class="hierarchy">
+                        <form class="categories-manager" method="PUT" action="/category/<%= categories[i].id%>">
+                            <button type="button" class="hidden cancel-edit" onclick="toggleForm(this)">X</button>
+                            
+                                <h2 class="data title"><%= categories[i].title %></h2>
+                                <input class="hidden" type="text" id="name" name="name" value="<%= categories[i].name %>">
+                                <select name="hierarchy" class="hidden" id="hierarchy">
+                                    <option value="0">Sem Hierarquia</option>
+                                    <% for(var u=0; u<categories.length; u++) {%>
+                                        <% if (categories[u].id == categories[i].hierarchy) { %>
+                                        <option value="<%= categories[u].id %>" selected><%= categories[u].name %></option>
+                                        <% } %>
+                                        <% if (categories[u].id != categories[i].hierarchy) { %>
+                                        <option value="<%= categories[u].id %>"><%= categories[u].name %></option>
+                                        <% } %>
+    
+                                    <% } %>
+                                </select>
+                                <div class="data body"><%- categories[i].body %></div>
+                                <div class="data hidden">
+                                    <textarea class="htmeditor" id="body" name="body"><%= categories[i].body %></textarea>
+                                </div>
+                            
+                            
+                <% if (!locals.public) {%>
+                
+                    
+                    
+                
+                <div class="categories-manager-box">
+                    
+                    <button type="button" class="PUT" onclick="transformToEdit(this)">Editar</button>
+                    <button type="button"class="DELETE"onclick="FormManager(this)"> Excluir</button>
+                </div>
+                <% } %>
+                <% } %>
+                   
+            </form>
+        </article>
+                <% } %>
+            
+          
+            </form>
+        </article>
+        <% } %>
+        
+    <% } %>
+    <% } %>

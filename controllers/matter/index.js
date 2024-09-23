@@ -8,14 +8,14 @@ module.exports = {
         const matters = await Matters.findAll()
         if(req.params.id){
             search = await Matters.findOne({where:{id:req.params.id}})
-            if(search != null) res.render('matters/home', {matters:[search], public:public})
-            if(search == null) res.render('matters/home', {message:'Not Found', public:public} , )
+            if(search != null) res.render('matters', {matters:[search], public:public})
+            if(search == null) res.render('matters', {message:'Not Found', public:public} , )
         }
         if(!req.params.id){
             if(!public) search = await Matters.findAll({where:{originUserID:req.user.id}})
             if(public) search = matters
         }
-        res.render('matters/home', {matters:search, public:public})
+        res.render('matters', {matters:search, public:public})
     },
     post:async(req,res) => {
         let search = await Matters.findAll({where:{originUserID:req.user.id}})
@@ -24,10 +24,10 @@ module.exports = {
         const slug = name.toLowerCase().replace(' ', '-')
         
         if(!name || !hierarchy|| !body) {
-            return res.render('matters/home', { matters:search, message: 'Please fill all fields'})
+            return res.render('matters', { matters:search, message: 'Please fill all fields'})
         }
         if(await Matters.findOne({where: {slug}})){
-            return res.render('matters/home', { matters:search, message: 'Already Exist'})
+            return res.render('matters', { matters:search, message: 'Already Exist'})
         }
         await Matters.create({name, hierarchy, image, body, originUserID, slug})
             res.redirect('matters?registrationdone')
@@ -37,7 +37,7 @@ module.exports = {
         const slug = name.toLowerCase().replace(' ', '-')
         const originUserID = req.user.id
         if(!name || !hierarchy|| !body) {
-            return res.render('matters/home', { matters:search, message: 'Please fill all fields'})
+            return res.render('matters', { matters:search, message: 'Please fill all fields'})
         }
         if(await Matters.findOne({where:{id:req.params,id}})){
             await Matters.update({name, hierarchy, image, body, originUserID, slug}, {where:{id:req.params,id}})

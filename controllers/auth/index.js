@@ -3,10 +3,10 @@ const passport = require('passport')
 module.exports = {
 
     loginView: (req,res) => {
-      res.render('auth/login')
+      res.render('auth', {login:true})
     },
     registerView: (req,res) => {
-      res.render('auth/register')
+      res.render('auth', {register:true})
     },
     logoutUser: (req, res) => {
       req.session.destroy(function(){
