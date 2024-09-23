@@ -8,9 +8,10 @@ module.exports ={
         const public = !req.isAuthenticated()
         let search 
         if(!req.params.id) search = await User.findOne({where:{id:req.user.dataValues.id}})
-        if(req.params.id) search = await User.findOne({where:{id:req.params.id}})
-        if(search != null) res.render('users', {user:search, public:public})
-        if(search == null) res.render('users', {message:'Not Found', public:public} , )
+        if(req.params.id >= 0) search = await User.findOne({where:{id:req.params.id}})
+        if(search != null) return res.render('users', {user:search, public:public})
+        if(search == null) return res.render('users', {message:'Not Found', public:public})
+          
         res.render('users', {user:search, public:public})
         
     },
